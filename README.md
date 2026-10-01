@@ -1,16 +1,43 @@
-# React + Vite
+# HireFlow Pro: AI Recruitment Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HireFlow Pro helps recruiters screen candidates faster. It analyses a CV against a job description with **Google Gemini** and returns a structured report: match score, matched and missing skills, learning priorities, a hire/shortlist/reject recommendation, and tailored interview questions.
 
-Currently, two official plugins are available:
+## What the analysis returns
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Match score** (0-100) and **resume quality** score
+- **Matched vs. missing skills**, plus **priority gaps** ranked by importance with an estimated time to learn
+- **Experience match** and a short culture-fit hint
+- **Recommendation**: Hire / Shortlist / Reject, with a written rationale
+- **Suggested career paths** and **custom interview questions** for the candidate
+- **Graceful fallback**: if the Gemini call fails, a built-in keyword-based analyser produces the same response format, so the API never returns an empty result
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Layer | Technology |
+|---|---|
+| Backend | Python, FastAPI |
+| AI | Google Gemini (`gemini-2.0-flash`) |
+| Database | Supabase |
+| Frontend | React, Vite |
 
-## Expanding the ESLint configuration
+The API is organised into route modules for authentication, jobs, candidates, AI analysis, analytics, skills, ranking and feedback.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting started
+
+```bash
+git clone https://github.com/noorfatima1123/hireflow-pro.git
+cd hireflow-pro
+
+# Backend
+pip install fastapi uvicorn python-dotenv google-generativeai
+cp .env.example .env     # add your own keys
+python main.py           # http://localhost:8000/docs
+
+# Frontend
+npm install
+npm run dev
+```
+
+## Author
+
+**Noor Fatima**: [GitHub](https://github.com/noorfatima1123) · [LinkedIn](https://www.linkedin.com/in/engr-noor-fatima-a4a142290)
